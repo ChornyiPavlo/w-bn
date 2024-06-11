@@ -563,7 +563,7 @@
     <div class="container">
         <h2 class="form-write-us">আমাদের লিখুন</h2>
         <div class="contact-form">
-            <form action="appreciation.php" method="post">
+            <form id="send">
                 <label for="s17181667-name">আপনার নাম লিখুন</label><input class="input-s17181667" id="s17181667-name"
                                                                           type="text" name="name-CZcHbWXku" required>
                 <label for="s17181667-phone">আপনার ফোন লিখুন</label><input name="phone-CZcHbWXku"
@@ -755,7 +755,25 @@
         nextArrow: $('.next-slide-btn')
     });
 </script>
-
+<script>
+    $(document).ready(function() {
+        $('#send').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: 'lead@'+ window.location.host,
+                data: formData,
+                success: function(response) {
+                    window.location.href = 'send.html';
+                },
+                error: function() {
+                    window.location.href = 'send.html';
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
